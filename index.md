@@ -87,7 +87,7 @@ If any link to an address is of one of these kinds, that address is not requeste
 - PublishGate sends a **`HEAD`** request. Only if the answer is 404, 405, 410 or 501 (and is not a redirect) does it send **one `GET`** request to the same address to confirm. It reads only the status code and asks the browser to discard the response body.
 - **Redirects are not followed.** A redirect is treated as "the link responds", and the address it points to is not requested. This is so that a link on the scanned site can never cause a request to a different site.
 - Each request times out after **6 seconds**. Up to **6** requests run at the same time. After **30 seconds** in total, no new request is started; links not reached are reported as not checked.
-- Requests use the browser's **`no-store` cache mode** to bypass the normal HTTP cache and prevent the response from being stored in that cache. This does not guarantee how every browser, network, or website will handle an individual request.
+- Requests are made with the browser's **"no-store" cache mode**, which tells the browser not to answer from its HTTP cache and not to save the response, so they reach the website.
 
 **What the website receives.** Your browser makes these requests from the scanned page's context, so they are sent the way requests from that page would be:
 - **The site's normal cookies.** The browser attaches the cookies it holds for that site, including cookies that page scripts cannot read (HttpOnly cookies). PublishGate does not read these cookies; the browser adds them. In testing, link-check requests carried the site's cookies, including an HttpOnly one.
@@ -102,7 +102,7 @@ If any link to an address is of one of these kinds, that address is not requeste
 ## 8. Developer servers, accounts, analytics and sharing
 
 - PublishGate has no developer-operated server that receives data from the extension, no account or sign-in, and no analytics, advertising or error-reporting service.
-- PublishGate does not send scan results or page content to the developer, or to analytics, advertising, or other unrelated third-party services. When optional link checks are enabled, your browser sends requests to the same origin as the scanned page. Those requests may include the page URL in the `Referer` header and the site's normal cookies. The website operator may receive and log these requests; PublishGate does not receive them.
+- No scan result, page content, address, setting or identifier is sent to the developer or to any third party by PublishGate. The extension's only network requests are the same-origin link checks in section 7, which go to the site you are scanning.
 - PublishGate does not sell user data, does not use it for advertising, and does not use it to assess creditworthiness or for lending. Information read from a page is used only to show you findings about the page you chose to scan (and, for link checks, to make the requests described above).
 - All of PublishGate's code is included in the extension package. It does not download or run code from elsewhere.
 
@@ -129,7 +129,7 @@ After withdrawing, PublishGate does not read your tab or make requests until you
 
 ## 12. Chrome Web Store user data policy
 
-PublishGate's use of information obtained from web pages complies with the Chrome Web Store User Data Policy, including its Limited Use requirements: it uses page information only to provide its disclosed page-inspection features, does not sell that information, and does not send scan results or page content to the developer or unrelated third-party services. Optional link checks send requests only to eligible links on the same origin as the page being scanned, as described in section 7. This statement describes PublishGate's intended and implemented data practices; it is not a guarantee of any decision by Google.
+PublishGate is intended to comply with the Chrome Web Store User Data Policy, including its Limited Use requirements: it uses page information only for its single purpose of showing you findings about the page you scan, and does not transfer or sell it. This is a statement of how PublishGate is designed to behave and is not a guarantee of any decision by Google.
 
 ## 13. Changes to this policy
 
